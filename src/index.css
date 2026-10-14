@@ -1,0 +1,19 @@
+/* Document-level rules only. Component styling is inline. */
+:root{--ink:#1A1917;--ink-deep:#11100F;--accent:#A84A24;--accent-deep:#8A3B1C}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#F4F1EC;color:#1A1917;font-family:'Archivo',system-ui,sans-serif;font-stretch:100%;font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip;text-wrap:pretty}
+a{color:inherit}
+a:hover{color:inherit}
+button,input,select,textarea{font-family:inherit;font-stretch:100%}
+:focus-visible{outline:3px solid var(--ink-deep);outline-offset:3px}
+[data-dark] :focus-visible{outline-color:#F4F1EC}
+[data-dark] ::placeholder{color:#F4F1EC;opacity:.5}
+[data-dark] input:focus-visible,[data-dark] textarea:focus-visible{outline:none}
+input:-webkit-autofill{-webkit-text-fill-color:#F4F1EC;transition:background-color 99999s}
+@keyframes mozsMarquee{from{transform:translateX(0)}
+to{transform:translateX(-50%)}
+}
+@keyframes mozsWipe{from{clip-path:inset(0 0 100% 0)}
+to{clip-path:inset(-0.2em -0.1em -0.3em -0.1em)}
+}
