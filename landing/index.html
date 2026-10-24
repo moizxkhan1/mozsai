@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MOZS.AI | Games and AI-powered products</title>
+<meta name="description" content="MOZS.AI builds games and AI-powered products. Game development, product engineering and AI engineering for studios, start-ups and businesses.">
+<meta name="theme-color" content="#F4F1EC">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MOZS.AI | Games and AI-powered products">
+<meta property="og:description" content="MOZS.AI builds games and AI-powered products. Game development, product engineering and AI engineering for studios, start-ups and businesses.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231A1917'/%3E%3Crect x='9' y='9' width='14' height='14' fill='%23A84A24'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<style>
+/* Layout: follows the MOZS.AI v5 mockup. Alternating warm-paper and near-black bands, hairline rules, condensed uppercase display, one rust accent. Single committed look (light paper + dark bands), colours set explicitly. */
+:root{
+  color-scheme:light;
+  --paper:#F4F1EC; --paper-2:#EAE6DE; --ink:#1A1917; --ink-2:#6B6760;
+  --night:#161514; --night-2:#211F1D; --night-3:#2B2826; --night-ink:#F3F0EA; --night-mute:#A9A49C;
+  --rust:#A84A24; --rust-dark:#8A3B1C; --rust-hi:#CB6A40;
+  --rule:rgba(26,25,23,.16); --rule-night:rgba(243,240,234,.16);
+  --font:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --max:1200px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:72px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important; transition:none!important}}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:30; background:var(--paper)}
+h1,h2,h3,h4,p{margin:0}
+ul{margin:0; padding:0; list-style:none}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--rust); outline-offset:3px}
+
+.wrap{max-width:var(--max); margin:0 auto; padding-left:max(24px,env(safe-area-inset-left,0px)); padding-right:max(24px,env(safe-area-inset-right,0px))}
+@media (max-width:560px){.wrap{padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}}
+.night{background:var(--night); color:var(--night-ink)}
+.night .mute{color:var(--night-mute)}
+.mute{color:var(--ink-2)}
+.band{padding-block:96px}
+@media (max-width:720px){.band{padding-block:64px}}
+
+.display{font-stretch:72%; font-weight:800; text-transform:uppercase; letter-spacing:-.015em; line-height:.92; text-wrap:balance}
+.h2{font-size:clamp(40px,6vw,84px)}
+.h3{font-stretch:78%; font-weight:750; text-transform:uppercase; letter-spacing:-.005em; line-height:1; font-size:clamp(24px,2.6vw,32px)}
+.kicker{font-size:13px; font-weight:600}
+.lead{font-size:clamp(17px,1.6vw,20px); max-width:46ch}
+.link{font-weight:600; font-size:15px; text-decoration:underline; text-underline-offset:5px; text-decoration-thickness:1px}
+.link:hover{color:var(--rust)}
+.night .link:hover{color:var(--rust-hi)}
+
+/* framed rust button, as in the mockup */
+.cta{position:relative; display:inline-flex; align-items:center; gap:14px; background:var(--rust); color:#fff; font:600 15px/1 var(--font); padding:16px 22px; border:0; cursor:pointer; text-decoration:none; transition:background .2s}
+.cta::before{content:""; position:absolute; inset:-7px; pointer-events:none;
+  --c:var(--rust); --l:12px; --t:1.5px;
+  background:
+   linear-gradient(var(--c),var(--c)) top left/var(--l) var(--t),
+   linear-gradient(var(--c),var(--c)) top left/var(--t) var(--l),
+   linear-gradient(var(--c),var(--c)) top right/var(--l) var(--t),
+   linear-gradient(var(--c),var(--c)) top right/var(--t) var(--l),
+   linear-gradient(var(--c),var(--c)) bottom left/var(--l) var(--t),
+   linear-gradient(var(--c),var(--c)) bottom left/var(--t) var(--l),
+   linear-gradient(var(--c),var(--c)) bottom right/var(--l) var(--t),
+   linear-gradient(var(--c),var(--c)) bottom right/var(--t) var(--l);
+  background-repeat:no-repeat; transition:inset .2s}
+.cta:hover{background:var(--rust-dark)} .cta:hover::before{inset:-10px}
+.cta svg{width:16px; height:16px}
+
+/* header */
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:var(--paper); border-bottom:1px solid transparent; transition:border-color .2s}
+.top.scrolled{border-bottom-color:var(--rule)}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; gap:24px; padding-block:18px}
+.logo{font-stretch:125%; font-weight:850; font-size:20px; letter-spacing:.02em; text-decoration:none; white-space:nowrap}
+.logo b{color:var(--rust); font-weight:inherit}
+.nav{display:flex; gap:28px; font-size:14px; font-weight:600}
+.nav a{text-decoration:none} .nav a:hover{color:var(--rust)}
+.menu-btn{display:none; background:none; border:0; font:600 14px var(--font); color:var(--ink); cursor:pointer; padding:6px 0}
+@media (max-width:860px){
+  .nav{display:none; position:absolute; left:0; right:0; top:100%; background:var(--paper); flex-direction:column; gap:0; border-bottom:1px solid var(--rule);
+       padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .nav.open{display:flex}
+  .nav a{padding:14px 0; border-top:1px solid var(--rule); font-size:16px}
+  .menu-btn{display:block}
+}
+
+/* hero */
+.hero{padding-block:72px 88px; display:grid; gap:36px}
+.hero h1{font-size:clamp(52px,10.5vw,150px)}
+.hero h1 .r{color:var(--rust)}
+.hero .rule{height:1px; background:var(--ink)}
+.hero-foot{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:32px; align-items:end}
+.hero-actions{display:flex; align-items:center; gap:32px; flex-wrap:wrap; padding:8px}
+@media (max-width:720px){.hero{padding-block:40px 64px} .hero-foot{grid-template-columns:1fr}}
+
+/* stats band + marquee */
+.stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--rule-night)}
+.stat{padding:28px 24px 0 0; display:grid; gap:10px}
+.stat + .stat{padding-left:24px; border-left:1px solid var(--rule-night)}
+.stat b{font-stretch:72%; font-weight:800; font-size:clamp(56px,8vw,112px); line-height:.9; font-variant-numeric:tabular-nums}
+.stat b i{font-style:normal; color:var(--rust-hi)}
+.stat span{font-size:14px; color:var(--night-mute); max-width:24ch}
+@media (max-width:720px){.stats{grid-template-columns:1fr} .stat + .stat{padding-left:0; border-left:0; border-top:1px solid var(--rule-night)} .stat{padding:22px 0}}
+.marquee-head{margin-top:72px; display:flex; justify-content:space-between; gap:16px; padding-bottom:16px; border-bottom:1px solid var(--rule-night)}
+.marquee{overflow:hidden; padding-block:22px; border-bottom:1px solid var(--rule-night); mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.track{display:flex; gap:56px; width:max-content; animation:slide 48s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{font-stretch:80%; font-weight:700; font-size:22px; text-transform:uppercase; white-space:nowrap; color:var(--night-ink)}
+.track span:nth-child(3n+2){font-style:italic; font-stretch:100%; font-weight:500; text-transform:none; color:var(--night-mute)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* section heads */
+.sec-head{display:grid; gap:20px; padding-bottom:40px; border-bottom:1px solid var(--ink)}
+.night .sec-head{border-bottom-color:var(--rule-night)}
+.sec-head .h2{max-width:24ch}
+.sec-head .lead{max-width:52ch}
+
+/* why */
+.why{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0}
+.why div{padding:28px 24px 0 0; display:grid; gap:12px; align-content:start}
+.why div + div{padding-left:24px; border-left:1px solid var(--rule)}
+.why .n{font-size:13px; font-weight:600; color:var(--rust)}
+.why h3{font-stretch:80%; font-weight:750; font-size:22px; line-height:1.1; text-transform:uppercase}
+.why p{font-size:15px; color:var(--ink-2)}
+@media (max-width:960px){.why{grid-template-columns:1fr 1fr} .why div:nth-child(3){padding-left:0; border-left:0} .why div{padding-bottom:28px}}
+@media (max-width:560px){.why{grid-template-columns:1fr} .why div + div{padding-left:0; border-left:0; border-top:1px solid var(--rule)}}
+
+/* services list (mockup project list pattern) */
+.svc-tabs{display:none; gap:6px 28px; margin:28px 0 0 12px; flex-wrap:wrap}
+.svc-cols{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 56px; margin-top:40px}
+.svc-col{min-width:0}
+.svc-col-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding-bottom:14px; border-bottom:1px solid var(--ink)}
+.svc-col-head .h3::before{content:""; display:inline-block; width:10px; height:10px; margin-right:12px; vertical-align:.18em}
+.svc-col[data-k="g"] .h3::before{background:var(--rust)} .svc-col[data-k="a"] .h3::before{background:var(--ink)}
+.svc-item{display:grid; gap:4px; padding-block:16px; border-bottom:1px solid var(--rule)}
+.svc-item h4{font-stretch:84%; font-weight:700; font-size:19px; line-height:1.15}
+.svc-item p{font-size:14.5px; color:var(--ink-2); line-height:1.5}
+@media (max-width:860px){
+  .svc-tabs{display:flex}
+  .svc-cols{grid-template-columns:1fr; margin-top:20px}
+  .svc-col:not(.on){display:none}
+}
+.filter{position:relative; background:none; border:0; padding:6px 0 6px 0; font:600 15px var(--font); color:var(--ink-2); cursor:pointer}
+.filter sup{font-size:10px; margin-left:3px}
+.filter[aria-pressed="true"]{color:var(--ink)}
+.filter[aria-pressed="true"]::before{content:""; position:absolute; left:-12px; top:50%; width:6px; height:6px; margin-top:-3px; background:var(--rust)}
+
+/* statement + packages (dark) */
+.statement{font-size:clamp(30px,4.6vw,64px); font-weight:500; line-height:1.1; letter-spacing:-.02em; max-width:24ch; text-wrap:balance; padding-bottom:8px}
+.statement em{font-style:normal; color:var(--rust-hi)}
+.pk-group{margin-top:64px}
+.pk-group-head{display:grid; gap:10px; padding-bottom:20px; border-bottom:1px solid var(--rule-night)}
+.pk-group-head .h3{font-size:clamp(28px,3vw,40px)}
+.pk-group-head p{font-size:16px; color:var(--night-mute); max-width:60ch}
+.pks{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:16px}
+.pk{background:var(--night-2); padding:28px 24px; display:grid; gap:18px; align-content:start; position:relative; min-width:0}
+.pk.feat{background:var(--night-3)}
+.pk.feat::after{content:attr(data-badge); position:absolute; top:0; right:0; background:var(--rust); color:#fff; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:6px 10px}
+.pk .time{font-size:13px; font-weight:600; color:var(--night-mute)}
+.pk h4{font-stretch:76%; font-weight:800; font-size:clamp(26px,2.4vw,32px); line-height:1; text-transform:uppercase}
+.pk .sum{font-size:15px; color:var(--night-mute)}
+.pk ul{display:grid; gap:8px; font-size:14.5px; padding-top:16px; border-top:1px solid var(--rule-night)}
+.pk li{padding-left:18px; position:relative}
+.pk li::before{content:""; position:absolute; left:0; top:.62em; width:7px; height:7px; background:var(--rust-hi)}
+.pk dl{margin:0; display:grid; gap:12px; padding-top:16px; border-top:1px solid var(--rule-night)}
+.pk dt{font-size:12px; font-weight:600; color:var(--night-mute)}
+.pk dd{margin:2px 0 0; font-weight:600; font-size:15px; line-height:1.4}
+@media (max-width:960px){.pks{grid-template-columns:1fr}}
+
+/* ways + process */
+.ways{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; margin-top:8px}
+.ways div{padding:28px 24px 28px 0; display:grid; gap:10px; align-content:start}
+.ways div + div{padding-left:24px; border-left:1px solid var(--rule)}
+.ways h3{font-stretch:78%; font-weight:750; font-size:26px; text-transform:uppercase; line-height:1}
+.ways p{color:var(--ink-2); font-size:15px}
+.steps{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin-top:56px}
+.step{border-top:1px solid var(--ink); padding-top:20px; display:grid; gap:10px; align-content:start}
+.step .n{font-stretch:72%; font-weight:800; font-size:44px; line-height:1; color:var(--rust)}
+.step h4{font-size:17px; font-weight:700}
+.step p{font-size:14.5px; color:var(--ink-2)}
+.promises{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:56px}
+.promises div{background:var(--paper-2); padding:22px; display:grid; gap:6px; align-content:start}
+.promises b{font-size:16px}
+.promises span{font-size:14.5px; color:var(--ink-2)}
+@media (max-width:860px){.ways,.promises{grid-template-columns:1fr} .ways div + div{padding-left:0; border-left:0; border-top:1px solid var(--rule)} .steps{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+
+/* team (dark) */
+.people{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:16px}
+.person{background:var(--night-2); padding:28px; display:grid; gap:20px; align-content:start; min-width:0}
+.p-top{display:grid; grid-template-columns:112px minmax(0,1fr); gap:20px; align-items:end}
+.p-top img{width:112px; height:112px; object-fit:cover; display:block; filter:saturate(.9)}
+.p-top h3{font-stretch:76%; font-weight:800; font-size:clamp(28px,2.6vw,36px); line-height:.95; text-transform:uppercase}
+.p-top .role{font-size:14px; color:var(--night-mute); margin-top:8px}
+.person ul.pts{display:grid; gap:9px; font-size:15px; padding-top:18px; border-top:1px solid var(--rule-night)}
+.person ul.pts li{padding-left:18px; position:relative}
+.person ul.pts li::before{content:""; position:absolute; left:0; top:.62em; width:7px; height:7px; background:var(--rust-hi)}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chips span{font-size:13px; font-weight:600; border:1px solid var(--rule-night); padding:5px 10px}
+.p-links{display:flex; flex-wrap:wrap; gap:20px}
+@media (max-width:960px){.people{grid-template-columns:1fr}}
+@media (max-width:420px){.p-top{grid-template-columns:84px minmax(0,1fr)} .p-top img{width:84px; height:84px}}
+
+/* faq */
+.faq-grid{display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:48px}
+.faq-grid .side{display:grid; gap:18px; align-content:start}
+.faq details{border-top:1px solid var(--rule)}
+.faq details:last-child{border-bottom:1px solid var(--rule)}
+.faq summary{list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:24px; padding-block:22px; font-weight:600; font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:""; flex:none; width:16px; height:16px; margin-top:4px;
+  background:linear-gradient(var(--ink),var(--ink)) center/16px 1.5px no-repeat, linear-gradient(var(--ink),var(--ink)) center/1.5px 16px no-repeat; transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding-bottom:24px; margin-top:-6px; color:var(--ink-2); max-width:58ch}
+@media (max-width:860px){.faq-grid{grid-template-columns:1fr; gap:24px}}
+
+/* contact (dark) */
+.contact-grid{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:56px; margin-top:48px}
+.emails{display:grid; border-top:1px solid var(--rule-night)}
+.emails > div{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:center; padding-block:18px; border-bottom:1px solid var(--rule-night)}
+.emails b{font-weight:700} .emails .who{font-size:15px}
+.emails .addr{font-size:15px; color:var(--night-mute); word-break:break-word}
+.copy{background:none; border:1px solid var(--rule-night); color:var(--night-ink); font:600 13px var(--font); padding:8px 12px; cursor:pointer}
+.copy:hover{border-color:var(--night-ink)}
+form{display:grid; gap:24px}
+.f2{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+label,.lbl{display:block; font-size:13px; font-weight:600; margin-bottom:8px}
+input[type=text],input[type=email],textarea{width:100%; background:transparent; border:0; border-bottom:1px solid var(--rule-night); color:var(--night-ink); font:400 16px var(--font); padding:8px 0 12px; outline:none; border-radius:0}
+input::placeholder,textarea::placeholder{color:#77726B}
+input:focus,textarea:focus{border-bottom-color:var(--rust-hi)}
+textarea{min-height:96px; resize:vertical}
+.opts{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px}
+.opts.five{grid-template-columns:repeat(auto-fill,minmax(132px,1fr))}
+.opt{position:relative}
+.opt input{position:absolute; opacity:0; inset:0; cursor:pointer}
+.opt span{display:flex; align-items:center; gap:10px; white-space:nowrap; border:1px solid var(--rule-night); padding:12px; font-size:14px; min-height:46px}
+.opt span::before{content:""; flex:none; width:10px; height:10px; border:1px solid var(--night-mute)}
+.opt input:checked + span{border-color:var(--rust-hi)}
+.opt input:checked + span::before{background:var(--rust-hi); border-color:var(--rust-hi)}
+.opt input:focus-visible + span{outline:2px solid var(--rust-hi); outline-offset:2px}
+.form-foot{display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--rule-night)}
+.form-foot p{font-size:14px; color:var(--night-mute)}
+.status{font-size:14px; color:var(--night-ink); background:var(--night-2); padding:14px 16px; border-left:3px solid var(--rust-hi)}
+.status button{margin-left:8px}
+.err{font-size:13px; color:#F09A74; margin-top:6px}
+@media (max-width:960px){.contact-grid{grid-template-columns:1fr; gap:40px}}
+@media (max-width:560px){.f2{grid-template-columns:1fr} .opts,.opts.five{grid-template-columns:1fr 1fr}}
+
+/* footer */
+.foot{background:#0F0E0D; color:var(--night-ink); padding-block:48px}
+.foot .row1{display:flex; flex-wrap:wrap; align-items:center; gap:16px 32px; padding-bottom:28px; border-bottom:1px solid var(--rule-night)}
+.foot .row1 .logo{color:var(--night-ink)}
+.foot .row2{display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; padding-top:24px; font-size:14px}
+.foot nav{display:flex; flex-wrap:wrap; gap:10px 24px}
+.foot nav a{text-decoration:none} .foot nav a:hover{color:var(--rust-hi)}
+.foot small{color:var(--night-mute); font-size:13px}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#hero" aria-label="MOZS.AI home">MOZS<b>AI</b></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#packages">Packages</a>
+      <a href="#how">How we work</a>
+      <a href="#team">Team</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="wrap hero" id="hero">
+  <h1 class="display">We build games and <span class="r">AI</span> systems</h1>
+  <div class="rule"></div>
+  <div class="hero-foot">
+    <p class="lead">A small, senior team of engineers, designers and artists. We use AI to move faster, and a person reviews everything before it reaches you.</p>
+    <div class="hero-actions">
+      <a class="cta" href="#contact">Book a free 30-minute call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      <a class="link" href="#services">See what we do</a>
+    </div>
+  </div>
+</section>
+
+<section class="night band">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>15<i>+</i></b><span>years of combined engineering experience</span></div>
+      <div class="stat"><b>25<i>+</i></b><span>projects delivered for clients around the world</span></div>
+      <div class="stat"><b>7<i>+</i></b><span>live game projects across Steam, VR, Web3 and mobile</span></div>
+    </div>
+    <div class="marquee-head"><span class="kicker">Projects our team has worked on</span><span class="kicker mute">Games, AI and products</span></div>
+    <div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+    <p class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)" id="projList"></p>
+  </div>
+</section>
+
+<section class="wrap band" id="why">
+  <div class="sec-head">
+    <span class="kicker">Why teams work with us</span>
+    <h2 class="display h2">Fast, and still made by hand</h2>
+    <p class="lead mute">AI speeds up the repetitive parts. People make the decisions, design the experience and finish the work.</p>
+  </div>
+  <div class="why">
+    <div><span class="n">01</span><h3>Faster, without cutting corners</h3><p>AI helps us move quickly. A senior engineer checks every piece of work, so speed never costs you quality.</p></div>
+    <div><span class="n">02</span><h3>AI-assisted, still handcrafted</h3><p>AI takes care of the groundwork. The decisions, design and finishing touches come from people who care about the craft.</p></div>
+    <div><span class="n">03</span><h3>You always know where things stand</h3><p>Regular updates and demos in plain language. You never have to chase us for progress.</p></div>
+    <div><span class="n">04</span><h3>One team, every discipline</h3><p>Engineering, design and art under one roof, so nothing gets lost between separate contractors.</p></div>
+  </div>
+</section>
+
+<section class="wrap band" id="services" style="padding-top:0">
+  <div class="sec-head">
+    <span class="kicker">What we do</span>
+    <h2 class="display h2">Games and products, under one roof</h2>
+    <p class="lead mute">Two areas, each led by someone who has spent years building and shipping real products in it.</p>
+  </div>
+  <div class="svc-tabs" role="group" aria-label="Choose a service area">
+    <button class="filter" type="button" id="tab-g" data-k="g" aria-pressed="true">Game development<sup>9</sup></button>
+    <button class="filter" type="button" id="tab-a" data-k="a" aria-pressed="false">Product &amp; AI<sup>8</sup></button>
+  </div>
+  <div class="svc-cols">
+    <div class="svc-col" data-k="g"><div class="svc-col-head"><h3 class="h3">Game development</h3><span class="kicker mute">9 services</span></div><div class="svc-rows" id="rows-g"></div></div>
+    <div class="svc-col" data-k="a"><div class="svc-col-head"><h3 class="h3">Product &amp; AI engineering</h3><span class="kicker mute">8 services</span></div><div class="svc-rows" id="rows-a"></div></div>
+  </div>
+</section>
+
+<section class="night band" id="packages">
+  <div class="wrap">
+    <p class="statement">One of us leads every project, start to finish, <em>with our team building alongside.</em></p>
+
+    <div class="pk-group">
+      <div class="pk-group-head"><h2 class="h3">Packages for game studios</h2><p>Each package is a starting point. We shape the scope around your game, and our team scales with it.</p></div>
+      <div class="pks">
+        <article class="pk">
+          <span class="time">4–6 weeks</span><h4>Prototype Sprint</h4>
+          <p class="sum">Turn an idea into something people can play.</p>
+          <ul><li>Your core gameplay loop, playable in Unreal or Unity</li><li>Basic controls, menus and UI</li><li>A build to show publishers, funders or playtesters</li><li>A short plan for what to build next</li></ul>
+          <dl><div><dt>Best for</dt><dd>New ideas, publisher pitches and funding applications</dd></div><div><dt>You get</dt><dd>A playable build and a clear plan for what comes next</dd></div></dl>
+        </article>
+        <article class="pk feat" data-badge="Full service">
+          <span class="time">4–12 months, depending on scope</span><h4>Full-Cycle Game Development</h4>
+          <p class="sum">We take your game from concept all the way to release.</p>
+          <ul><li>Concept, game design and prototyping</li><li>Full production: engineering, design and art</li><li>Testing, polish and release on Steam</li><li>Store page, builds and release planning</li></ul>
+          <dl><div><dt>Best for</dt><dd>Studios and founders who want their game made end to end</dd></div><div><dt>You get</dt><dd>A finished game, ready for release</dd></div></dl>
+        </article>
+        <article class="pk">
+          <span class="time">Monthly</span><h4>Talent for Hire</h4>
+          <p class="sum">Experienced engineers, designers or artists who join your team.</p>
+          <ul><li>Hire one specialist or a small group</li><li>They work inside your engine, project and tools</li><li>Experienced in Unreal Engine, Unity and professional studio workflows</li><li>Every person is hand-picked and vetted by our senior leads</li></ul>
+          <dl><div><dt>Best for</dt><dd>Teams that need extra hands for a busy stretch</dd></div><div><dt>You get</dt><dd>Experienced people in your team, on flexible monthly terms</dd></div></dl>
+        </article>
+      </div>
+    </div>
+
+    <div class="pk-group">
+      <div class="pk-group-head"><h2 class="h3">Packages for products and AI</h2><p>Start small with one automation, launch a new product, or keep a team on hand as you grow. Our team scales with your project.</p></div>
+      <div class="pks">
+        <article class="pk">
+          <span class="time">4–6 weeks</span><h4>AI Workflow Automation</h4>
+          <p class="sum">Take one time-consuming process off your team's plate.</p>
+          <ul><li>We map the process and find where AI helps most</li><li>An AI agent or workflow connected to the tools you already use</li><li>Your staff approve anything important before it happens</li><li>Training and handover for your team</li></ul>
+          <dl><div><dt>Best for</dt><dd>A task that takes up hours of your team's week</dd></div><div><dt>You get</dt><dd>A working automation and a team that knows how to use it</dd></div></dl>
+        </article>
+        <article class="pk feat" data-badge="Most popular">
+          <span class="time">8 weeks</span><h4>MVP in 8 Weeks</h4>
+          <p class="sum">A working first version of your product, ready for real users.</p>
+          <ul><li>Product planning and design, agreed with you up front</li><li>A web app with sign-ups, payments and an admin area</li><li>AI features where they genuinely add value</li><li>Launch, hosting set-up and a full handover</li></ul>
+          <dl><div><dt>Best for</dt><dd>Founders and businesses launching something new</dd></div><div><dt>You get</dt><dd>A live product ready for real users, fully handed over to you</dd></div></dl>
+        </article>
+        <article class="pk">
+          <span class="time">Monthly, ongoing</span><h4>Product Team</h4>
+          <p class="sum">An ongoing team to grow and look after your product.</p>
+          <ul><li>New features as your product grows</li><li>Fixing and strengthening existing apps, including AI-built ones</li><li>Monitoring, security updates and hosting</li><li>Help planning what to build next</li></ul>
+          <dl><div><dt>Best for</dt><dd>Products that are live and growing</dd></div><div><dt>You get</dt><dd>An ongoing team looking after your product as it grows</dd></div></dl>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap band" id="how">
+  <div class="sec-head">
+    <span class="kicker">Ways to work with us</span>
+    <h2 class="display h2">Choose the setup that suits you</h2>
+    <p class="lead mute">A defined project, an ongoing team, or individual specialists who join yours.</p>
+  </div>
+  <div class="ways">
+    <div><h3>Fixed-price project</h3><p>A clear scope, timeline and price agreed up front. All our packages work this way.</p></div>
+    <div><h3>Dedicated team</h3><p>A team that works on your game or product month to month, led by one of us.</p></div>
+    <div><h3>Talent for hire</h3><p>Individual engineers, designers or artists who join your team and work in your tools.</p></div>
+  </div>
+  <div class="steps" aria-label="How a project runs">
+    <div class="step"><span class="n">01</span><h4>Intro call</h4><p>A free 30-minute call to understand what you need and whether we're the right fit.</p></div>
+    <div class="step"><span class="n">02</span><h4>Plan and price</h4><p>We send a clear plan with scope, timeline, team and price.</p></div>
+    <div class="step"><span class="n">03</span><h4>Build</h4><p>Work in short cycles, with regular updates and scheduled demos you can try yourself.</p></div>
+    <div class="step"><span class="n">04</span><h4>Launch and handover</h4><p>We launch with you and hand over everything we've built.</p></div>
+  </div>
+  <div class="promises">
+    <div><b>You own it all</b><span>All code, designs, assets and IP belong to you.</span></div>
+    <div><b>Honest about AI</b><span>We tell you where we use AI, and never ship AI-generated art or content without your approval.</span></div>
+    <div><b>No surprises</b><span>Prices are agreed before we start. Changes are discussed first.</span></div>
+  </div>
+</section>
+
+<section class="night band" id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">The team</span>
+      <h2 class="display h2">The people leading your project</h2>
+      <p class="lead mute">Every project is led by one of us directly, supported by designers, artists and engineers from our wider team.</p>
+    </div>
+    <div class="people">
+      <article class="person">
+        <div class="p-top"><img src="./img/moiz.jpg" alt="Moiz Khan" width="112" height="112"><div><h3>Moiz Khan</h3><p class="role">Lead, Product &amp; AI Engineering</p></div></div>
+        <ul class="pts">
+          <li>7+ years building software products, with the last two focused on AI</li>
+          <li>Currently leads AI and agentic automation at Postscript</li>
+          <li>Has led engineering teams and client projects across North America, Europe and the Middle East</li>
+          <li>Builds AI agents and automations that take repetitive work off teams, from customer support to back-office admin</li>
+          <li>Has taken products from idea to launch, including subscription platforms, data platforms and AI-powered apps</li>
+          <li>Works directly with clients on scope, budget and delivery</li>
+        </ul>
+        <div class="chips"><span>Postscript</span><span>Tangible</span><span>FundAtlas</span><span>AGM</span><span>eDoula</span><span>Hey Dividend</span></div>
+        <div class="p-links"><a class="link" href="https://www.linkedin.com/in/moizakhan1" target="_blank" rel="noopener">LinkedIn</a><a class="link" href="https://github.com/moizxkhan1" target="_blank" rel="noopener">GitHub</a></div>
+      </article>
+      <article class="person">
+        <div class="p-top"><img src="./img/saihaj.jpg" alt="Saihaj Shahbaz Butt" width="112" height="112"><div><h3>Saihaj Shahbaz Butt</h3><p class="role">Lead, Game Development</p></div></div>
+        <ul class="pts">
+          <li>7+ years in game development, mainly in Unreal Engine with a background in Unity</li>
+          <li>Has led engineering and production for indie studios in Europe and the US</li>
+          <li>Ships projects end to end, from first prototype through launch and post-launch</li>
+          <li>Contributed to 7+ live projects across Steam, VR, Web3 and mobile</li>
+          <li>Runs Charcadev, a 50k+ game development community on YouTube and Instagram</li>
+          <li>Mentors new and hobbyist game developers as they build their careers, and has taken part in local game development mentoring initiatives</li>
+        </ul>
+        <div class="chips"><span>Warden's Will</span><span>Pera Coda</span><span>The Spaceminers</span><span>Virtua Metaverse</span><span>Cooper's Planet</span><span>NeosVR</span><span>Charcadev</span></div>
+        <div class="p-links"><a class="link" href="https://www.linkedin.com/in/saihaj-shahbaz-butt" target="_blank" rel="noopener">LinkedIn</a><a class="link" href="https://linktr.ee/charcadev" target="_blank" rel="noopener">Charcadev</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="wrap band" id="faq">
+  <div class="faq-grid">
+    <div class="side">
+      <span class="kicker">Questions</span>
+      <h2 class="display h2">Before you get in touch</h2>
+      <p class="mute">Something else on your mind? Email <a class="link" href="mailto:mozsaishared@gmail.com">mozsaishared@gmail.com</a></p>
+    </div>
+    <div class="faq">
+      <details><summary>How much does a project cost?</summary><p>It depends on the scope. After a short call we send you a clear plan and price in writing, before you commit to anything.</p></details>
+      <details><summary>Who actually works on my project?</summary><p>One of the founders leads it, with engineers, designers and artists from our team doing the build. You'll always know who's on it.</p></details>
+      <details><summary>Who owns the work?</summary><p>You do. All code, designs, assets and IP belong to you.</p></details>
+      <details><summary>How do you use AI?</summary><p>To speed up the repetitive parts of engineering. People make the decisions and review every piece of work, and we never ship AI-generated art or content without your approval.</p></details>
+      <details><summary>Can you pick up a project someone else started?</summary><p>Yes. We start by reviewing what already exists, so we both know what we're taking on.</p></details>
+      <details><summary>Which engines and tools do you work with?</summary><p>Unreal Engine and Unity for games. For products, modern web technologies and the major AI providers, chosen to fit your project rather than lock you in.</p></details>
+      <details><summary>Will you sign an NDA?</summary><p>Yes. Send it over before the first call.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="night band" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Get in touch</span>
+      <h2 class="display h2">Let's talk about your project</h2>
+      <p class="lead mute">Tell us what you're building, and one of us will get back to you to set up a call.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="kicker" style="margin-bottom:14px">Prefer email?</p>
+        <div class="emails">
+          <div><div><p class="who"><b>Saihaj Shahbaz Butt</b>, Games</p><p class="addr">saihajshahbaz@gmail.com</p></div><button class="copy" type="button" data-copy="saihajshahbaz@gmail.com">Copy</button></div>
+          <div><div><p class="who"><b>Moiz Khan</b>, Product and AI</p><p class="addr">moizxkhan1@gmail.com</p></div><button class="copy" type="button" data-copy="moizxkhan1@gmail.com">Copy</button></div>
+          <div><div><p class="who"><b>General enquiries</b></p><p class="addr">mozsaishared@gmail.com</p></div><button class="copy" type="button" data-copy="mozsaishared@gmail.com">Copy</button></div>
+        </div>
+      </div>
+      <form id="enq" novalidate>
+        <div class="f2">
+          <div><label for="f-name">Name</label><input id="f-name" type="text" placeholder="Your name" autocomplete="name"></div>
+          <div><label for="f-email">Email</label><input id="f-email" type="email" placeholder="you@company.com" autocomplete="email"><p class="err" id="e-email" hidden>Add an email so we can reply.</p></div>
+        </div>
+        <div><label for="f-what">What are you building?</label><textarea id="f-what" placeholder="The project, the deadline, and what exists already"></textarea><p class="err" id="e-what" hidden>Tell us a little about the project.</p></div>
+        <fieldset style="border:0;margin:0;padding:0"><legend class="lbl">What kind of project?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="kind" id="k-game" value="Game"><span>Game</span></label>
+            <label class="opt"><input type="radio" name="kind" id="k-ai" value="AI"><span>AI</span></label>
+            <label class="opt"><input type="radio" name="kind" id="k-web" value="Product or web app"><span>Product or web</span></label>
+            <label class="opt"><input type="radio" name="kind" id="k-ns" value="Not sure"><span>Not sure</span></label>
+          </div>
+        </fieldset>
+        <fieldset style="border:0;margin:0;padding:0"><legend class="lbl">Rough budget</legend>
+          <div class="opts five">
+            <label class="opt"><input type="radio" name="budget" id="b1" value="Under £15k"><span>Under £15k</span></label>
+            <label class="opt"><input type="radio" name="budget" id="b2" value="£15k to £40k"><span>£15k–£40k</span></label>
+            <label class="opt"><input type="radio" name="budget" id="b3" value="£40k to £100k"><span>£40k–£100k</span></label>
+            <label class="opt"><input type="radio" name="budget" id="b4" value="Over £100k"><span>Over £100k</span></label>
+            <label class="opt"><input type="radio" name="budget" id="b5" value="Not sure yet"><span>Not sure yet</span></label>
+          </div>
+        </fieldset>
+        <div class="form-foot">
+          <p>Opens an email to Saihaj and Moiz with your message.</p>
+          <button class="cta" type="submit">Email your message <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+        </div>
+        <p class="status" id="status" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="row1"><a class="logo" href="#hero">MOZS<b>AI</b></a><span class="mute" style="color:var(--night-mute)">mozsaishared@gmail.com</span></div>
+    <div class="row2">
+      <nav aria-label="Footer"><a href="#services">Services</a><a href="#packages">Packages</a><a href="#how">How we work</a><a href="#team">Team</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="https://www.linkedin.com/in/moizakhan1" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <small>© 2026 MOZS.AI</small>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // header
+  const top=document.getElementById('top'), btn=document.getElementById('menuBtn'), nav=document.getElementById('nav');
+  const onScroll=()=>top.classList.toggle('scrolled', window.scrollY>8);
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  btn.addEventListener('click',()=>{const o=nav.classList.toggle('open'); btn.setAttribute('aria-expanded',o); btn.textContent=o?'Close':'Menu';});
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.textContent='Menu';}));
+
+  // marquee
+  const projects=["Warden's Will","Postscript","Pera Coda","Tangible","The Spaceminers","FundAtlas","Virtua Metaverse","AGM","Cooper's Planet","eDoula","NeosVR","Hey Dividend","Charcadev"];
+  const track=document.getElementById('track');
+  const html=projects.map(p=>`<span>${p}</span>`).join('');
+  track.innerHTML=html+html;
+  document.getElementById('projList').textContent='Projects our team has worked on: '+projects.join(', ');
+
+  // services
+  const svc=[
+    ["g","Full-cycle game development","Your whole game, from concept to release, with every discipline in one team."],
+    ["g","Prototypes and vertical slices","A playable version of your idea to test, pitch or fund."],
+    ["g","Gameplay and systems","Combat, abilities, enemy behaviour, progression and game flow."],
+    ["g","Multiplayer and online features","Co-op, matchmaking, voice chat and Steam or Epic online services."],
+    ["g","Game design","Mechanics, levels, balancing and how the game feels to play."],
+    ["g","Art","2D and 3D art for characters, environments, props and key art."],
+    ["g","UI and tools","Menus and HUDs for players, plus custom tools that speed up your team."],
+    ["g","Visual effects","Shaders, particles and effects that bring the game to life."],
+    ["g","Launch and post-launch","Testing, playtests, performance analysis, release, post-release support and post-launch DLCs."],
+    ["a","Product engineering","Planning, design and building of complete products, from first idea to scale."],
+    ["a","UI/UX design","Clear, easy-to-use interfaces, from early wireframes to polished screens."],
+    ["a","MVPs and SaaS products","From idea to a working product with sign-ups, payments and admin."],
+    ["a","Web apps and internal tools","Dashboards, portals and tools that replace spreadsheets and copy-paste."],
+    ["a","AI agents and automations","AI that handles repetitive tasks across your email, CRM and other tools."],
+    ["a","Voice and support agents","AI that answers calls and messages, books appointments and resolves tickets."],
+    ["a","AI assistants for your knowledge","Answers drawn from your own documents and data, with sources shown."],
+    ["a","Maintenance and scaling","Keeping apps secure, reliable and up to date as they grow, including ones built with AI tools."]
+  ];
+  const esc=s=>s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  ['g','a'].forEach(k=>{document.getElementById('rows-'+k).innerHTML=svc.filter(x=>x[0]===k).map(([,n,d])=>`<div class="svc-item"><h4>${esc(n)}</h4><p>${esc(d)}</p></div>`).join('');});
+  const cols=document.querySelectorAll('.svc-col'), tabs=document.querySelectorAll('.svc-tabs .filter');
+  function show(k){cols.forEach(c=>c.classList.toggle('on',c.dataset.k===k)); tabs.forEach(t=>t.setAttribute('aria-pressed',t.dataset.k===k));}
+  tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.k)));
+  show('g');
+
+  // copy buttons
+  async function copyText(t, el){
+    try{ await navigator.clipboard.writeText(t); if(el){const o=el.textContent; el.textContent='Copied'; setTimeout(()=>el.textContent=o,1600);} return true; }
+    catch(e){ return false; }
+  }
+  document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{
+    const ok=await copyText(b.dataset.copy,b);
+    if(!ok){ const r=document.createRange(); r.selectNodeContents(b.previousElementSibling.querySelector('.addr')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+  }));
+
+  // enquiry form: composes an email
+  const form=document.getElementById('enq'), status=document.getElementById('status');
+  const TO='mozsaishared@gmail.com', CC='moizxkhan1@gmail.com,saihajshahbaz@gmail.com';
+  function compose(){
+    const v=id=>document.getElementById(id).value.trim();
+    const kind=(form.querySelector('input[name=kind]:checked')||{}).value||'Not given';
+    const budget=(form.querySelector('input[name=budget]:checked')||{}).value||'Not given';
+    return {subject:`New project enquiry${v('f-name')?' from '+v('f-name'):''}`,
+      body:`Name: ${v('f-name')||'Not given'}\nEmail: ${v('f-email')}\nProject type: ${kind}\nRough budget: ${budget}\n\nWhat we're building:\n${v('f-what')}`};
+  }
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=document.getElementById('f-email'), what=document.getElementById('f-what');
+    const badEmail=!/^\S+@\S+\.\S+$/.test(email.value.trim()), badWhat=what.value.trim().length<3;
+    document.getElementById('e-email').hidden=!badEmail; document.getElementById('e-what').hidden=!badWhat;
+    if(badEmail){email.focus(); return;} if(badWhat){what.focus(); return;}
+    const m=compose();
+    const href=`mailto:${TO}?cc=${encodeURIComponent(CC)}&subject=${encodeURIComponent(m.subject)}&body=${encodeURIComponent(m.body)}`;
+    const a=document.createElement('a'); a.href=href; a.target='_blank'; a.rel='noopener'; document.body.appendChild(a); a.click(); a.remove();
+    status.hidden=false;
+    status.innerHTML=`Your email app should open with the message ready to send. If it didn't, copy the message and send it to <b>${TO}</b>. <button class="copy" type="button" id="copyMsg">Copy message</button>`;
+    document.getElementById('copyMsg').addEventListener('click',ev=>copyText(`To: ${TO}\nSubject: ${m.subject}\n\n${m.body}`, ev.currentTarget));
+  });
+})();
+</script>
+</body>
+</html>
