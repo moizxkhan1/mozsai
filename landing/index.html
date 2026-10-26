@@ -102,6 +102,16 @@ a{color:inherit}
 .hero-actions{display:flex; align-items:center; gap:32px; flex-wrap:wrap; padding:8px}
 @media (max-width:720px){.hero{padding-block:40px 64px} .hero-foot{grid-template-columns:1fr}}
 
+/* showreel */
+.reel{margin:0 0 72px}
+.reel-frame{position:relative; aspect-ratio:16/9; max-width:100%; background:#000; overflow:hidden}
+.reel-frame video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+.reel-ctrl{position:absolute; right:16px; bottom:16px; display:flex; gap:8px}
+.reel-ctrl button{background:rgba(22,21,20,.72); color:var(--night-ink); border:1px solid var(--rule-night); font:600 13px var(--font); padding:9px 14px; cursor:pointer; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px)}
+.reel-ctrl button:hover{border-color:var(--night-ink)}
+.reel-cap{display:flex; justify-content:space-between; gap:16px; padding-top:14px; font-size:13px; font-weight:600}
+@media (max-width:560px){.reel{margin-bottom:48px} .reel-ctrl{right:10px; bottom:10px} .reel-ctrl button{padding:7px 10px; font-size:12px}}
+
 /* stats band + marquee */
 .stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--rule-night)}
 .stat{padding:28px 24px 0 0; display:grid; gap:10px}
@@ -299,8 +309,20 @@ textarea{min-height:96px; resize:vertical}
   </a>
 </section>
 
-<section class="night band">
+<section class="night band" id="reel">
   <div class="wrap">
+    <figure class="reel">
+      <div class="reel-frame">
+        <video id="reelVideo" muted loop playsinline preload="none" poster="/media/showreel-poster.jpg" aria-label="MOZS.AI game development showreel"
+               data-src-sm="/media/showreel-720.mp4" data-src-lg="/media/showreel-1080.mp4"></video>
+        <a hidden id="reelSm" href="/media/showreel-720.mp4"></a><a hidden id="reelLg" href="/media/showreel-1080.mp4"></a>
+        <div class="reel-ctrl">
+          <button type="button" id="reelPlay" aria-pressed="false">Pause</button>
+          <button type="button" id="reelSound" aria-pressed="false">Sound on</button>
+        </div>
+      </div>
+      <figcaption class="reel-cap"><span>Game development showreel</span><span class="mute">50 seconds</span></figcaption>
+    </figure>
     <div class="stats">
       <div class="stat"><b>15<i>+</i></b><span>years of combined engineering experience</span></div>
       <div class="stat"><b>25<i>+</i></b><span>projects delivered for clients around the world</span></div>
@@ -546,6 +568,24 @@ textarea{min-height:96px; resize:vertical}
   window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
   btn.addEventListener('click',()=>{const o=nav.classList.toggle('open'); btn.setAttribute('aria-expanded',o); btn.textContent=o?'Close':'Menu';});
   nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.textContent='Menu';}));
+
+  // showreel: autoplays muted when on screen, pauses when off screen or if the visitor prefers less motion
+  const v=document.getElementById('reelVideo'), bPlay=document.getElementById('reelPlay'), bSound=document.getElementById('reelSound');
+  if(v){
+    const small=window.matchMedia('(max-width: 900px)').matches || (navigator.connection&&navigator.connection.saveData);
+    v.src=document.getElementById(small?'reelSm':'reelLg').href; v.preload='metadata';
+    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let userPaused=reduce;
+    const sync=()=>{bPlay.textContent=v.paused?'Play':'Pause'; bPlay.setAttribute('aria-pressed',String(!v.paused)); bSound.textContent=v.muted?'Sound on':'Sound off'; bSound.setAttribute('aria-pressed',String(!v.muted));};
+    const tryPlay=()=>{const r=v.play(); if(r&&r.catch) r.catch(()=>sync());};
+    bPlay.addEventListener('click',()=>{ if(v.paused){userPaused=false; tryPlay();} else {userPaused=true; v.pause();} });
+    bSound.addEventListener('click',()=>{ v.muted=!v.muted; if(!v.muted && v.paused){userPaused=false; tryPlay();} sync(); });
+    v.addEventListener('play',sync); v.addEventListener('pause',sync); v.addEventListener('volumechange',sync);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!userPaused) tryPlay(); } else if(!v.paused){ v.pause(); } }),{threshold:.35}).observe(v);
+    } else if(!userPaused){ tryPlay(); }
+    sync();
+  }
 
   // marquee
   const projects=["Warden's Will","Postscript","Pera Coda","Tangible","The Spaceminers","FundAtlas","Virtua Metaverse","AGM","Cooper's Planet","eDoula","NeosVR","Hey Dividend","Charcadev"];
