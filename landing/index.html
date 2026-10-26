@@ -91,6 +91,13 @@ a{color:inherit}
 .hero h1{font-size:clamp(52px,10.5vw,150px)}
 .hero h1 .r{color:var(--rust)}
 .hero .rule{height:1px; background:var(--ink)}
+.founders{display:flex; align-items:center; gap:16px; text-decoration:none; justify-self:start; padding-top:8px}
+.founders .faces{display:flex; flex:none}
+.founders .faces img{width:44px; height:44px; object-fit:cover; border:2px solid var(--paper); display:block}
+.founders .faces img + img{margin-left:-10px}
+.founders b{display:block; font-size:15px; font-weight:700}
+.founders .mute{display:block; font-size:14px}
+.founders:hover b{color:var(--rust)}
 .hero-foot{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:32px; align-items:end}
 .hero-actions{display:flex; align-items:center; gap:32px; flex-wrap:wrap; padding:8px}
 @media (max-width:720px){.hero{padding-block:40px 64px} .hero-foot{grid-template-columns:1fr}}
@@ -206,6 +213,7 @@ a{color:inherit}
 /* faq */
 .faq-grid{display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:48px}
 .faq-grid .side{display:grid; gap:18px; align-content:start}
+.faq-sec .faq-grid{border-top:1px solid var(--ink); padding-top:48px}
 .faq details{border-top:1px solid var(--rule)}
 .faq details:last-child{border-bottom:1px solid var(--rule)}
 .faq summary{list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:24px; padding-block:22px; font-weight:600; font-size:17px}
@@ -264,10 +272,10 @@ textarea{min-height:96px; resize:vertical}
     <a class="logo" href="#hero" aria-label="MOZS.AI home">MOZS<b>AI</b></a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="#services">Services</a>
+      <a href="#team">Team</a>
+      <a href="#services">Features</a>
       <a href="#packages">Packages</a>
       <a href="#how">How we work</a>
-      <a href="#team">Team</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -281,10 +289,14 @@ textarea{min-height:96px; resize:vertical}
   <div class="hero-foot">
     <p class="lead">A small, senior team of engineers, designers and artists. We use AI to move faster, and a person reviews everything before it reaches you.</p>
     <div class="hero-actions">
-      <a class="cta" href="#contact">Book a free 30-minute call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      <a class="cta" href="#contact">Book a free discovery call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       <a class="link" href="#services">See what we do</a>
     </div>
   </div>
+  <a class="founders" href="#team">
+    <span class="faces"><img src="./img/moiz.jpg" alt="" width="44" height="44"><img src="./img/saihaj.jpg" alt="" width="44" height="44"></span>
+    <span><b>Led by Moiz Khan and Saihaj Shahbaz Butt</b><span class="mute">15+ years between them in product, AI and game development</span></span>
+  </a>
 </section>
 
 <section class="night band">
@@ -308,13 +320,51 @@ textarea{min-height:96px; resize:vertical}
   </div>
   <div class="why">
     <div><span class="n">01</span><h3>Faster, without cutting corners</h3><p>AI helps us move quickly. A senior engineer checks every piece of work, so speed never costs you quality.</p></div>
-    <div><span class="n">02</span><h3>AI-assisted, still handcrafted</h3><p>AI takes care of the groundwork. The decisions, design and finishing touches come from people who care about the craft.</p></div>
+    <div><span class="n">02</span><h3>AI-assisted, still handcrafted</h3><p>AI speeds up the work. The decisions, design and finishing touches come from people who care about the craft.</p></div>
     <div><span class="n">03</span><h3>You always know where things stand</h3><p>Regular updates and demos in plain language. You never have to chase us for progress.</p></div>
     <div><span class="n">04</span><h3>One team, every discipline</h3><p>Engineering, design and art under one roof, so nothing gets lost between separate contractors.</p></div>
   </div>
 </section>
 
-<section class="wrap band" id="services" style="padding-top:0">
+<section class="night band" id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">The team</span>
+      <h2 class="display h2">The people leading your project</h2>
+      <p class="lead mute">Every project is led by one of us directly, supported by designers, artists and engineers from our wider team.</p>
+    </div>
+    <div class="people">
+      <article class="person">
+        <div class="p-top"><img src="./img/moiz.jpg" alt="Moiz Khan" width="112" height="112"><div><h3>Moiz Khan</h3><p class="role">Lead, Product &amp; AI Engineering</p></div></div>
+        <ul class="pts">
+          <li>7+ years building software products, with the last two focused on AI</li>
+          <li>Currently leads AI and agentic automation at Postscript</li>
+          <li>Has led engineering teams and client projects across North America, Europe and the Middle East</li>
+          <li>Builds AI agents and automations that take repetitive work off teams, from customer support to back-office admin</li>
+          <li>Has taken products from idea to launch, including subscription platforms, data platforms and AI-powered apps</li>
+          <li>Works directly with clients on scope, budget and delivery</li>
+        </ul>
+        <div class="chips"><span>Postscript</span><span>Tangible</span><span>FundAtlas</span><span>AGM</span><span>eDoula</span><span>Hey Dividend</span></div>
+        <div class="p-links"><a class="link" href="https://www.linkedin.com/in/moizakhan1" target="_blank" rel="noopener">LinkedIn</a><a class="link" href="https://github.com/moizxkhan1" target="_blank" rel="noopener">GitHub</a></div>
+      </article>
+      <article class="person">
+        <div class="p-top"><img src="./img/saihaj.jpg" alt="Saihaj Shahbaz Butt" width="112" height="112"><div><h3>Saihaj Shahbaz Butt</h3><p class="role">Lead, Game Development</p></div></div>
+        <ul class="pts">
+          <li>7+ years in game development, mainly in Unreal Engine with a background in Unity</li>
+          <li>Has led engineering and production for indie studios in Europe and the US</li>
+          <li>Ships projects end to end, from first prototype through launch and post-launch</li>
+          <li>Contributed to 7+ live projects across Steam, VR, Web3 and mobile</li>
+          <li>Runs Charcadev, a 50k+ game development community on YouTube and Instagram</li>
+          <li>Mentors new and hobbyist game developers as they build their careers, and has taken part in local game development mentoring initiatives</li>
+        </ul>
+        <div class="chips"><span>Warden's Will</span><span>Pera Coda</span><span>The Spaceminers</span><span>Virtua Metaverse</span><span>Cooper's Planet</span><span>NeosVR</span><span>Charcadev</span></div>
+        <div class="p-links"><a class="link" href="https://www.linkedin.com/in/saihaj-shahbaz-butt" target="_blank" rel="noopener">LinkedIn</a><a class="link" href="https://linktr.ee/charcadev" target="_blank" rel="noopener">Charcadev</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="wrap band" id="services">
   <div class="sec-head">
     <span class="kicker">What we do</span>
     <h2 class="display h2">Games and products, under one roof</h2>
@@ -325,8 +375,8 @@ textarea{min-height:96px; resize:vertical}
     <button class="filter" type="button" id="tab-a" data-k="a" aria-pressed="false">Product &amp; AI<sup>8</sup></button>
   </div>
   <div class="svc-cols">
-    <div class="svc-col" data-k="g"><div class="svc-col-head"><h3 class="h3">Game development</h3><span class="kicker mute">9 services</span></div><div class="svc-rows" id="rows-g"></div></div>
-    <div class="svc-col" data-k="a"><div class="svc-col-head"><h3 class="h3">Product &amp; AI engineering</h3><span class="kicker mute">8 services</span></div><div class="svc-rows" id="rows-a"></div></div>
+    <div class="svc-col" data-k="g"><div class="svc-col-head"><h3 class="h3">Game development</h3><span class="kicker mute">9 features</span></div><div class="svc-rows" id="rows-g"></div></div>
+    <div class="svc-col" data-k="a"><div class="svc-col-head"><h3 class="h3">Product &amp; AI engineering</h3><span class="kicker mute">8 features</span></div><div class="svc-rows" id="rows-a"></div></div>
   </div>
 </section>
 
@@ -338,7 +388,7 @@ textarea{min-height:96px; resize:vertical}
       <div class="pk-group-head"><h2 class="h3">Packages for game studios</h2><p>Each package is a starting point. We shape the scope around your game, and our team scales with it.</p></div>
       <div class="pks">
         <article class="pk">
-          <span class="time">4–6 weeks</span><h4>Prototype Sprint</h4>
+          <span class="time">6–8 weeks</span><h4>Prototype Sprint</h4>
           <p class="sum">Turn an idea into something people can play.</p>
           <ul><li>Your core gameplay loop, playable in Unreal or Unity</li><li>Basic controls, menus and UI</li><li>A build to show publishers, funders or playtesters</li><li>A short plan for what to build next</li></ul>
           <dl><div><dt>Best for</dt><dd>New ideas, publisher pitches and funding applications</dd></div><div><dt>You get</dt><dd>A playable build and a clear plan for what comes next</dd></div></dl>
@@ -350,7 +400,7 @@ textarea{min-height:96px; resize:vertical}
           <dl><div><dt>Best for</dt><dd>Studios and founders who want their game made end to end</dd></div><div><dt>You get</dt><dd>A finished game, ready for release</dd></div></dl>
         </article>
         <article class="pk">
-          <span class="time">Monthly</span><h4>Talent for Hire</h4>
+          <span class="time">Monthly, ongoing</span><h4>Talent for Hire</h4>
           <p class="sum">Experienced engineers, designers or artists who join your team.</p>
           <ul><li>Hire one specialist or a small group</li><li>They work inside your engine, project and tools</li><li>Experienced in Unreal Engine, Unity and professional studio workflows</li><li>Every person is hand-picked and vetted by our senior leads</li></ul>
           <dl><div><dt>Best for</dt><dd>Teams that need extra hands for a busy stretch</dd></div><div><dt>You get</dt><dd>Experienced people in your team, on flexible monthly terms</dd></div></dl>
@@ -396,9 +446,9 @@ textarea{min-height:96px; resize:vertical}
     <div><h3>Talent for hire</h3><p>Individual engineers, designers or artists who join your team and work in your tools.</p></div>
   </div>
   <div class="steps" aria-label="How a project runs">
-    <div class="step"><span class="n">01</span><h4>Intro call</h4><p>A free 30-minute call to understand what you need and whether we're the right fit.</p></div>
+    <div class="step"><span class="n">01</span><h4>Discovery call</h4><p>A free 30-minute call to understand what you need and whether we're the right fit.</p></div>
     <div class="step"><span class="n">02</span><h4>Plan and price</h4><p>We send a clear plan with scope, timeline, team and price.</p></div>
-    <div class="step"><span class="n">03</span><h4>Build</h4><p>Work in short cycles, with regular updates and scheduled demos you can try yourself.</p></div>
+    <div class="step"><span class="n">03</span><h4>Build</h4><p>Work in scheduled cycles, with regular updates and demos you can try yourself.</p></div>
     <div class="step"><span class="n">04</span><h4>Launch and handover</h4><p>We launch with you and hand over everything we've built.</p></div>
   </div>
   <div class="promises">
@@ -408,45 +458,8 @@ textarea{min-height:96px; resize:vertical}
   </div>
 </section>
 
-<section class="night band" id="team">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="kicker">The team</span>
-      <h2 class="display h2">The people leading your project</h2>
-      <p class="lead mute">Every project is led by one of us directly, supported by designers, artists and engineers from our wider team.</p>
-    </div>
-    <div class="people">
-      <article class="person">
-        <div class="p-top"><img src="./img/moiz.jpg" alt="Moiz Khan" width="112" height="112"><div><h3>Moiz Khan</h3><p class="role">Lead, Product &amp; AI Engineering</p></div></div>
-        <ul class="pts">
-          <li>7+ years building software products, with the last two focused on AI</li>
-          <li>Currently leads AI and agentic automation at Postscript</li>
-          <li>Has led engineering teams and client projects across North America, Europe and the Middle East</li>
-          <li>Builds AI agents and automations that take repetitive work off teams, from customer support to back-office admin</li>
-          <li>Has taken products from idea to launch, including subscription platforms, data platforms and AI-powered apps</li>
-          <li>Works directly with clients on scope, budget and delivery</li>
-        </ul>
-        <div class="chips"><span>Postscript</span><span>Tangible</span><span>FundAtlas</span><span>AGM</span><span>eDoula</span><span>Hey Dividend</span></div>
-        <div class="p-links"><a class="link" href="https://www.linkedin.com/in/moizakhan1" target="_blank" rel="noopener">LinkedIn</a><a class="link" href="https://github.com/moizxkhan1" target="_blank" rel="noopener">GitHub</a></div>
-      </article>
-      <article class="person">
-        <div class="p-top"><img src="./img/saihaj.jpg" alt="Saihaj Shahbaz Butt" width="112" height="112"><div><h3>Saihaj Shahbaz Butt</h3><p class="role">Lead, Game Development</p></div></div>
-        <ul class="pts">
-          <li>7+ years in game development, mainly in Unreal Engine with a background in Unity</li>
-          <li>Has led engineering and production for indie studios in Europe and the US</li>
-          <li>Ships projects end to end, from first prototype through launch and post-launch</li>
-          <li>Contributed to 7+ live projects across Steam, VR, Web3 and mobile</li>
-          <li>Runs Charcadev, a 50k+ game development community on YouTube and Instagram</li>
-          <li>Mentors new and hobbyist game developers as they build their careers, and has taken part in local game development mentoring initiatives</li>
-        </ul>
-        <div class="chips"><span>Warden's Will</span><span>Pera Coda</span><span>The Spaceminers</span><span>Virtua Metaverse</span><span>Cooper's Planet</span><span>NeosVR</span><span>Charcadev</span></div>
-        <div class="p-links"><a class="link" href="https://www.linkedin.com/in/saihaj-shahbaz-butt" target="_blank" rel="noopener">LinkedIn</a><a class="link" href="https://linktr.ee/charcadev" target="_blank" rel="noopener">Charcadev</a></div>
-      </article>
-    </div>
-  </div>
-</section>
 
-<section class="wrap band" id="faq">
+<section class="wrap band faq-sec" id="faq" style="padding-top:0">
   <div class="faq-grid">
     <div class="side">
       <span class="kicker">Questions</span>
@@ -519,7 +532,7 @@ textarea{min-height:96px; resize:vertical}
   <div class="wrap">
     <div class="row1"><a class="logo" href="#hero">MOZS<b>AI</b></a><span class="mute" style="color:var(--night-mute)">mozsaishared@gmail.com</span></div>
     <div class="row2">
-      <nav aria-label="Footer"><a href="#services">Services</a><a href="#packages">Packages</a><a href="#how">How we work</a><a href="#team">Team</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="https://www.linkedin.com/in/moizakhan1" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <nav aria-label="Footer"><a href="#team">Team</a><a href="#services">Features</a><a href="#packages">Packages</a><a href="#how">How we work</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="https://www.linkedin.com/in/moizakhan1" target="_blank" rel="noopener">LinkedIn</a></nav>
       <small>© 2026 MOZS.AI</small>
     </div>
   </div>
