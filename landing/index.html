@@ -486,7 +486,7 @@ textarea{min-height:96px; resize:vertical}
     <div class="side">
       <span class="kicker">Questions</span>
       <h2 class="display h2">Before you get in touch</h2>
-      <p class="mute">Something else on your mind? Email <a class="link" href="mailto:mozsaishared@gmail.com">mozsaishared@gmail.com</a></p>
+      <p class="mute">Something else on your mind? Email <a class="link" href="mailto:contact@mozs.ai">contact@mozs.ai</a></p>
     </div>
     <div class="faq">
       <details><summary>How much does a project cost?</summary><p>It depends on the scope. After a short call we send you a clear plan and price in writing, before you commit to anything.</p></details>
@@ -511,9 +511,9 @@ textarea{min-height:96px; resize:vertical}
       <div>
         <p class="kicker" style="margin-bottom:14px">Prefer email?</p>
         <div class="emails">
-          <div><div><p class="who"><b>Saihaj Shahbaz Butt</b>, Games</p><p class="addr">saihajshahbaz@gmail.com</p></div><button class="copy" type="button" data-copy="saihajshahbaz@gmail.com">Copy</button></div>
-          <div><div><p class="who"><b>Moiz Khan</b>, Product and AI</p><p class="addr">moizxkhan1@gmail.com</p></div><button class="copy" type="button" data-copy="moizxkhan1@gmail.com">Copy</button></div>
-          <div><div><p class="who"><b>General enquiries</b></p><p class="addr">mozsaishared@gmail.com</p></div><button class="copy" type="button" data-copy="mozsaishared@gmail.com">Copy</button></div>
+          <div><div><p class="who"><b>Saihaj Shahbaz Butt</b>, Games</p><p class="addr">saihaj@mozs.ai</p></div><button class="copy" type="button" data-copy="saihaj@mozs.ai">Copy</button></div>
+          <div><div><p class="who"><b>Moiz Khan</b>, Product and AI</p><p class="addr">moiz@mozs.ai</p></div><button class="copy" type="button" data-copy="moiz@mozs.ai">Copy</button></div>
+          <div><div><p class="who"><b>General enquiries</b></p><p class="addr">contact@mozs.ai</p></div><button class="copy" type="button" data-copy="contact@mozs.ai">Copy</button></div>
         </div>
       </div>
       <form id="enq" novalidate>
@@ -552,7 +552,7 @@ textarea{min-height:96px; resize:vertical}
 
 <footer class="foot">
   <div class="wrap">
-    <div class="row1"><a class="logo" href="#hero">MOZS<b>AI</b></a><span class="mute" style="color:var(--night-mute)">mozsaishared@gmail.com</span></div>
+    <div class="row1"><a class="logo" href="#hero">MOZS<b>AI</b></a><span class="mute" style="color:var(--night-mute)">contact@mozs.ai</span></div>
     <div class="row2">
       <nav aria-label="Footer"><a href="#team">Team</a><a href="#services">Features</a><a href="#packages">Packages</a><a href="#how">How we work</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="https://www.linkedin.com/in/moizakhan1" target="_blank" rel="noopener">LinkedIn</a></nav>
       <small>© 2026 MOZS.AI</small>
@@ -633,7 +633,7 @@ textarea{min-height:96px; resize:vertical}
 
   // enquiry form: composes an email
   const form=document.getElementById('enq'), status=document.getElementById('status');
-  const TO='mozsaishared@gmail.com', CC='moizxkhan1@gmail.com,saihajshahbaz@gmail.com';
+  const TO='contact@mozs.ai', CC='moiz@mozs.ai,saihaj@mozs.ai';
   function compose(){
     const v=id=>document.getElementById(id).value.trim();
     const kind=(form.querySelector('input[name=kind]:checked')||{}).value||'Not given';
